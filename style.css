@@ -1,0 +1,201 @@
+/* --- Theme Colors (Blue focus) --- */
+:root {
+    --primary-blue: #4285F4; /* Google Blue */
+    --primary-blue-dark: #0b57d0;
+    --primary-blue-light: #e8f0fe;
+    --text-primary: #202124;
+    --text-secondary: #5f6368;
+    --bg-main: #ffffff;
+    --bg-alt: #f8f9fa;
+    --border-color: #dfe1e5;
+    --shadow-color: rgba(32, 33, 36, 0.1);
+    --shadow-color-hover: rgba(32, 33, 36, 0.15);
+    --panel-bg: #ffffff;
+    --panel-width: 300px; /* Width of side panels */
+    --popover-max-width: 600px; /* Max width for skills popover */
+}
+
+/* Basic Reset & Font */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+/* Main Content Centering */
+.main-center-content {
+    flex-grow: 1; /* Allow this section to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertical centering */
+    align-items: center; /* Horizontal centering */
+    padding: 20px;
+    width: 100%;
+    max-width: 700px; /* Limit width of central search area */
+    margin: 0 auto; /* Horizontal centering fallback */
+}
+
+/* Header */
+.profile-header { text-align: center; margin-bottom: 30px; width: 100%; }
+.profile-header h1 { font-size: 3em; font-weight: 500; color: var(--text-primary); }
+
+/* Search Wrapper & Container */
+#search-wrapper { position: relative; width: 100%; margin-bottom: 30px; }
+#search-container {
+    display: flex; width: 100%; margin: 0 auto; border: 1px solid var(--border-color);
+    border-radius: 24px; overflow: hidden; background-color: var(--bg-main);
+    box-shadow: 0 1px 6px var(--shadow-color); transition: box-shadow 0.2s ease-in-out;
+}
+#search-container:hover, #search-container.active { box-shadow: 0 2px 8px var(--shadow-color-hover); border-color: #c4c7cc; }
+#search-input { flex-grow: 1; border: none; padding: 13px 20px; font-size: 1em; outline: none; background: transparent; color: var(--text-primary); }
+#search-button { border: none; background-color: transparent; padding: 0 18px; cursor: pointer; color: var(--primary-blue); font-size: 1.1em; display: flex; align-items: center; justify-content: center; }
+#search-button:hover { color: var(--primary-blue-dark); }
+
+/* Search Results Dropdown */
+.results-dropdown {
+    position: absolute; top: calc(100% + 4px); left: 0; right: 0; background-color: var(--bg-main);
+    border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 6px var(--shadow-color); max-height: 300px; overflow-y: auto;
+    z-index: 1000; display: none; text-align: left; list-style: none; padding: 8px 0;
+}
+.results-dropdown.visible { display: block; }
+.result-item { padding: 10px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px; color: var(--text-primary); }
+.result-item:hover { background-color: var(--bg-alt); }
+.result-item i { color: var(--text-secondary); font-size: 0.9em; width: 15px; /* Align icons */ text-align: center;}
+.result-item strong { font-weight: 500; }
+.result-item span { color: var(--text-secondary); font-size: 0.9em;}
+.result-item a { text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%;} /* Make link fill item */
+.no-results { cursor: default; color: var(--text-secondary); }
+
+
+/* Footer */
+.profile-footer {
+    text-align: center; padding: 30px 20px 20px 20px; width: 100%; color: var(--text-secondary);
+    background-color: var(--bg-alt); /* Subtle bg for footer */
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Pushes footer down if content is short */
+}
+.profile-footer h2 { font-size: 1.4em; font-weight: 500; margin-bottom: 10px; color: var(--text-primary); }
+.profile-footer p { max-width: 500px; margin: 0 auto 15px auto; font-size: 0.95em; }
+.profile-footer .links { margin-bottom: 20px; }
+.profile-footer .links a { color: var(--primary-blue); text-decoration: none; font-weight: 500; margin: 0 10px; font-size: 1em; }
+.profile-footer .links a:hover { text-decoration: underline; color: var(--primary-blue-dark); }
+.profile-footer .copyright { font-size: 0.85em; margin-top: 15px; }
+
+
+/* Panel Triggers (Top Left) */
+.panel-triggers { position: fixed; top: 15px; left: 15px; z-index: 1010; display: flex; gap: 10px; }
+.panel-trigger-rhp { position: fixed; top: 15px; right: 15px; z-index: 1010; display: flex; gap: 10px; }
+.panel-trigger-btn {
+    background-color: var(--bg-main); color: var(--text-secondary); border: 1px solid var(--border-color);
+    border-radius: 20px; padding: 8px 15px; cursor: pointer; font-size: 0.9em; display: inline-flex;
+    align-items: center; gap: 8px; box-shadow: 0 1px 3px var(--shadow-color); transition: all 0.2s ease;
+}
+.panel-trigger-btn:hover { background-color: var(--bg-alt); box-shadow: 0 2px 4px var(--shadow-color-hover); }
+.panel-trigger-btn i { color: var(--primary-blue); }
+
+
+/* Skills Popover */
+.skills-popover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8); /* Start smaller and centered */
+    background-color: var(--panel-bg);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    padding: 25px 30px;
+    max-width: var(--popover-max-width);
+    width: 90%; /* Responsive width */
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto;
+    z-index: 1005;
+    opacity: 0;
+    visibility: hidden; /* Use visibility for better accessibility/performance */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; /* Delay visibility change */
+}
+.skills-popover.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    visibility: visible;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+}
+.skills-popover h2 { font-size: 1.4em; font-weight: 500; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+.skills-popover h2 i { color: var(--primary-blue); }
+.skills-bubble-container { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; /* Center bubbles */}
+.skill-bubble { /* Individual skill style */
+    background-color: var(--primary-blue-light); color: var(--primary-blue-dark);
+    padding: 8px 18px; border-radius: 20px; font-size: 0.95em; font-weight: 500;
+    white-space: nowrap; /* Prevent wrapping within a bubble */
+}
+.close-popover-btn { /* Shared style with panel close */
+    position: absolute; top: 10px; right: 10px; background: none; border: none;
+    font-size: 1.4em; color: var(--text-secondary); cursor: pointer; padding: 5px;
+}
+.close-popover-btn:hover { color: var(--text-primary); }
+
+
+/* Articles Side Panel (Right) */
+.side-panel.right-panel {
+    left: auto; /* Override default left */
+    right: 0;
+    border-right: none; /* Remove left panel border */
+    border-left: 1px solid var(--border-color); /* Add border on left */
+    transform: translateX(100%); /* Hidden off-screen right */
+}
+.side-panel.right-panel.active { transform: translateX(0); } /* Slide in */
+/* Common side panel styles from previous CSS apply here too (width, height, bg, padding-top, z-index, transition, overflow-y) */
+.side-panel {
+    position: fixed; top: 0; width: var(--panel-width); height: 100%; background-color: var(--panel-bg);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1); /* Shadow on the left */
+    padding: 20px; padding-top: 60px; z-index: 1005; overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+}
+.close-panel-btn { /* Shared style */
+    position: absolute; top: 15px; right: 15px; background: none; border: none;
+    font-size: 1.4em; color: var(--text-secondary); cursor: pointer; padding: 5px;
+}
+.close-panel-btn:hover { color: var(--text-primary); }
+.side-panel h2 { font-size: 1.4em; font-weight: 500; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+.side-panel h2 i { color: var(--primary-blue); }
+.panel-content { margin-top: 15px; }
+/* Articles list styles inside panel from previous CSS apply */
+#articles-list .article-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color); }
+#articles-list .article-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+#articles-list h3 { font-size: 1.05em; margin-bottom: 3px; }
+#articles-list h3 a { color: var(--primary-blue-dark); text-decoration: none; font-weight: 500; }
+#articles-list h3 a:hover { text-decoration: underline; }
+#articles-list p { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 5px;}
+#articles-list .platform { font-size: 0.8em; color: var(--text-secondary); background-color: #eee; padding: 2px 8px; border-radius: 10px; display: inline-block;}
+
+
+/* Overlay */
+.overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); z-index: 1001; display: none; opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s; visibility: hidden;
+}
+.overlay.active { display: block; opacity: 1; visibility: visible; transition-delay: 0s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-header h1 { font-size: 2.5em; }
+    .main-center-content { max-width: 95%; padding: 15px; }
+    :root { --panel-width: 280px; --popover-max-width: 90%; }
+}
+@media (max-width: 480px) {
+    body { font-size: 15px; }
+    .profile-header h1 { font-size: 2em; }
+    :root { --panel-width: 85%; --popover-max-width: 90%;}
+    .panel-triggers { top: 10px; left: 10px; }
+    .panel-trigger-btn { padding: 6px 12px; font-size: 0.85em;}
+    #search-input { padding: 12px 15px; }
+    .profile-footer h2 { font-size: 1.2em; }
+    .skill-bubble { padding: 6px 14px; font-size: 0.9em; } /* Adjust bubble padding */
+}

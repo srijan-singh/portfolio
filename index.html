@@ -1,98 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-  -->
-  <base href="/portfolio/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="srijanverse_portfolio">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <title>srijanverse_portfolio</title>
-  <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srijan Singh - Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
-    var serviceWorkerVersion = '3163974897';
-    var scriptLoaded = false;
-    function loadMainDartJs() {
-      if (scriptLoaded) {
-        return;
-      }
-      scriptLoaded = true;
-      var scriptTag = document.createElement('script');
-      scriptTag.src = 'main.dart.js';
-      scriptTag.type = 'application/javascript';
-      document.body.append(scriptTag);
-    }
+    <div class="panel-triggers">
+        <button id="skills-trigger" class="panel-trigger-btn" aria-label="Show Skills Toolkit" aria-expanded="false">
+            <i class="fas fa-tools"></i> Toolkit
+        </button>
+    </div>
+    <div class="panel-trigger-rhp">
+        <button id="articles-trigger" class="panel-trigger-btn" aria-label="Toggle Blog/Posts Panel" aria-expanded="false">
+            <i class="fas fa-feather-alt"></i> Blog/Posts
+        </button>
+    </div>
 
-    if ('serviceWorker' in navigator) {
-      // Service workers are supported. Use them.
-      window.addEventListener('load', function () {
-        // Wait for registration to finish before dropping the <script> tag.
-        // Otherwise, the browser will load the script multiple times,
-        // potentially different versions.
-        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
-        navigator.serviceWorker.register(serviceWorkerUrl)
-          .then((reg) => {
-            function waitForActivation(serviceWorker) {
-              serviceWorker.addEventListener('statechange', () => {
-                if (serviceWorker.state == 'activated') {
-                  console.log('Installed new service worker.');
-                  loadMainDartJs();
-                }
-              });
-            }
-            if (!reg.active && (reg.installing || reg.waiting)) {
-              // No active web worker and we have installed or are installing
-              // one for the first time. Simply wait for it to activate.
-              waitForActivation(reg.installing ?? reg.waiting);
-            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
-              // When the app updates the serviceWorkerVersion changes, so we
-              // need to ask the service worker to update.
-              console.log('New service worker available.');
-              reg.update();
-              waitForActivation(reg.installing);
-            } else {
-              // Existing service worker is still good.
-              console.log('Loading app from service worker.');
-              loadMainDartJs();
-            }
-          });
+    <div id="skills-popover" class="popover skills-popover" role="dialog" aria-modal="true" aria-labelledby="skills-trigger" aria-hidden="true">
+        <div class="popover-content">
+            <h2><i class="fas fa-tools"></i> Toolkit / Skills</h2>
+            <div id="skills-bubble-container" class="skills-bubble-container panel-content">
+                </div>
+            <button class="close-popover-btn" aria-label="Close Skills Toolkit"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
 
-        // If service worker doesn't succeed in a reasonable amount of time,
-        // fallback to plaint <script> tag.
-        setTimeout(() => {
-          if (!scriptLoaded) {
-            console.warn(
-              'Failed to load app from service worker. Falling back to plain <script> tag.',
-            );
-            loadMainDartJs();
-          }
-        }, 4000);
-      });
-    } else {
-      // Service workers not supported. Just drop the <script> tag.
-      loadMainDartJs();
-    }
-  </script>
+    <aside id="articles-panel" class="side-panel right-panel" aria-labelledby="articles-trigger">
+        <button class="close-panel-btn" aria-label="Close Blog/Posts Panel"><i class="fas fa-times"></i></button>
+        <h2><i class="fas fa-feather-alt"></i> Blog & Posts</h2>
+        <div id="articles-list" class="panel-content">
+            </div>
+    </aside>
+
+    <main class="main-center-content">
+        <header class="profile-header">
+            <h1>Srijan Singh</h1>
+        </header>
+
+        <div id="search-wrapper">
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Search projects or skills..." aria-label="Search projects or skills" autocomplete="off">
+                <button id="search-button" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div id="search-results-dropdown" class="results-dropdown" role="listbox" aria-hidden="true">
+                </div>
+        </div>
+    </main>
+
+    <footer class="profile-footer">
+        <h2>Let's Solve Problems Together</h2>
+        <p>Leveraging technology to build efficient solutions. Explore my work via search, or connect below.</p>
+        <div class="links">
+             <a href="https://www.linkedin.com/in/srijan-dev" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+             <a href="https://github.com/srijan-singh" target="_blank" rel="noopener noreferrer">GitHub</a>
+             </div>
+         <p class="copyright">&copy; <span id="current-year"></span> Srijan Singh. Current time: <span id="current-time"></span> (Kochi, India)</p>
+    </footer>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
