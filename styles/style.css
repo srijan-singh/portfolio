@@ -91,7 +91,6 @@ body {
 
 /* Panel Triggers (Top Left) */
 .panel-triggers { position: fixed; top: 15px; left: 15px; z-index: 1010; display: flex; gap: 10px; }
-.panel-trigger-rhp { position: fixed; top: 15px; right: 15px; z-index: 1010; display: flex; gap: 10px; }
 .panel-trigger-btn {
     background-color: var(--bg-main); color: var(--text-secondary); border: 1px solid var(--border-color);
     border-radius: 20px; padding: 8px 15px; cursor: pointer; font-size: 0.9em; display: inline-flex;
